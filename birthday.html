@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Surprise</title>
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            overflow: hidden;
+            font-family: 'Roboto', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('https://img.freepik.com/free-photo/transparent-plastic-butterfly_1409-7306.jpg?size=626&ext=jpg&ga=GA1.1.943108187.1729166206&semt=ais_hybrid');
+            background-size: cover;
+            background-position: center;
+            filter: blur(8px);
+            -webkit-filter: blur(8px);
+            z-index: -1;
+            animation: backgroundPulse 10s infinite alternate;
+        }
+
+        @keyframes backgroundPulse {
+            0% { filter: blur(6px) brightness(1); }
+            100% { filter: blur(6px) brightness(1.2); }
+        }
+
+        .container {
+            position: relative;
+            width: 800px;
+            height: 600px;
+            overflow: hidden;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .page {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.7);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            box-sizing: border-box;
+            opacity: 0;
+            transform: translateY(-100%);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .page::before {
+            content: '';
+            height: 600px;
+            width: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('sv.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0.9;
+            z-index: -1;
+        }
+
+        .page-content {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            max-width: 80%;
+            overflow: hidden; /* Hide the overflow */
+            position: relative; /* For positioning */
+        }
+
+        .page.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        h2, h3, p {
+            font-family: 'Pacifico', cursive;
+            text-align: center;
+            margin: 20px 0;
+            animation: rainbow 5s linear infinite;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        @keyframes rainbow {
+            0% { color: #ff4081; }
+            25% { color: #3f51b5; }
+            50% { color: #4caf50; }
+            75% { color: #ff9800; }
+            100% { color: #ff4081; }
+        }
+
+        p {
+            text-align: center;
+            margin: 10px 0;
+            animation: fadeInUp 0.5s;
+            color: #333;
+            font-size: 18px;
+            text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .balloons {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .balloon {
+            position: absolute;
+            width: 60px;
+            height: 80px;
+            border-radius: 50%;
+            animation: float 5s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+
+        .balloon:nth-child(1) { background-color: rgba(255, 40, 90, 0.7); left: 10%; top: 20%; animation-delay: 0s; }
+        .balloon:nth-child(2) { background-color: rgba(9, 215, 160, 0.7); left: 30%; top: 10%; animation-delay: 1s; }
+        .balloon:nth-child(3) { background-color: rgba(255, 186, 26, 0.7); right: 30%; top: 20%; animation-delay: 2s; }
+        .balloon:nth-child(4) { background-color: rgba(12, 122, 159, 0.7); right: 10%; top: 10%; animation-delay: 3s; }
+
+        .firecracker {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: radial-gradient(circle, #ff6b6b, #feca57);
+            border-radius: 50%;
+            animation: explode 1s forwards;
+        }
+
+        @keyframes explode {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(20); opacity: 0.5; }
+            100% { transform: scale(40); opacity: 0; }
+        }
+
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #f0f;
+            animation: confettiFall 5s linear infinite;
+        }
+
+        @keyframes confettiFall {
+            0% { transform: translateY(-100%) rotate(0deg); }
+            100% { transform: translateY(100vh) rotate(720deg); }
+        }
+
+        .sparkle {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            background-color: #fff;
+            border-radius: 50%;
+            animation: sparkle 2s linear infinite;
+        }
+
+        @keyframes sparkle {
+            0%, 100% { opacity: 0; transform: scale(0); }
+            50% { opacity: 1; transform: scale(1); }
+        }
+        .image-container {
+            width: 800px; /* Set your desired width */
+            height: 800px; /* Set your desired height */
+            overflow: hidden; /* Hide the overflow */
+            position: relative; 
+            top: 20px;
+
+        }
+
+        .image-container img {
+            width: 100%; /* Make the image cover the container width */
+            height: auto; /* Maintain aspect ratio */
+            position: absolute; /* Allow for precise positioning */
+            top: 0; /* Align the image to the top */
+            left: 0; /* Align the image to the left */
+        }
+        @keyframes backgroundAnimation {
+            0% {
+                background-position: 0% 50%;
+            }
+            100% {
+                background-position: 100% 50%;
+            }
+        }
+
+    </style>
+</head>
+<body>
+<audio id="background-music" autoplay loop>
+    <source src="ThaayeThaayeVS.mp3" type="audio/mp3">
+    Your browser does not support the audio element.
+</audio>
+<!-- <audio src="Maharaja.mp3" controls></audio> -->
+<div class="container">
+    <div class="page active">
+        <div class="page-content">
+            <h2>Happy Birthday!</h2>
+            <div class="balloons">
+                <div class="balloon"></div>
+                <div class="balloon"></div>
+                <div class="balloon"></div>
+                <div class="balloon"></div>
+            </div>
+        </div>
+    </div>
+    <div class="page">
+        <div class="page-content">
+            <h3>Happy Birthday</h3>
+            <p>Dear Everything🫶🏻</p>
+            <p>Sending all my love to you on this special day. I’m so grateful you’re in my life!
+                Happy birthday to the best person I know. Thankful for you today and every day!
+                May your birthday be full of joy, love, and celebration. You deserve the very best!
+                Happy birthday to a truly special person! Here’s to a year filled with even more love and laughs.
+                Wishing you a birthday that’s just as beautiful, fun, and magical as you are!
+                I’m so proud of the person you’ve become, and I can’t wait to see where this year takes you. Happy birthday Papa❤️</p>
+        </div>
+    </div>
+    <div class="page">
+        <div class="page-content">
+            <h3>Papa😍</h3>
+            <p>Wishing you the happy happy birthday❤️Thank you for being the caring, and unique person you are. You deserve to have an amazing day every day, but I hope today is especially magical. Here’s to another year! I’m so thankful for you. Never forget how much you’re loved and appreciated by everyone. Happy Birthday!. Many happy returns to the person who never ceases to make me smile. You bring so much to my life, and you’re a blessing to everyone around you. I hope you know how much we appreciate you.Today is all about celebrating a truly incredible person. You’re one of the smartest, kindest, and most compassionate people I know, and I feel so blessed to be in your life. Thank you for being you!</p>
+        </div>
+    </div>
+    <div class="page">
+        <p style="
+        font-size: 30px; 
+        color: #000000; 
+        background: linear-gradient(270deg, #ff4081, #00bcd4);
+        background-size: 400% 400%; 
+        animation: backgroundAnimation 10s ease infinite; 
+        padding: 20px; 
+        border-radius: 10px; 
+        text-align: center;">
+        இனிய பிறந்தநாள் வாழ்த்துக்கள்(⊙ｏ⊙)
+        But Don't thing ever I'm in some other hands, you lost me like that. Bcoz Still I'm your daughter only. CBE and BLR are the places which is I used to study but in that you'll suffer more. Even that's too your imagination only. I'm the person who always remains same. I didn't change anything for anyone.
+    </p>
+    </div>
+    <div class="page">
+        <div class="page-content">
+            <h3>Popzz💕</h3>
+            <p>Sometimes the best way to say "I'm sorry" doesn't involve words.
+                Please plug the holes with your forgiveness. I am sorry.
+                I have learned that sometimes SORRY is not enough. You actually have to change yourself for something.I just want to tell you that I did not really know what happened to me, Bcoz people are my age they're getting salary but still I'm planning for Everything to do.                 Regret, heartbreak, and sadness have stolen my life's happiness. I am sorry for letting you down, but I promise to erase your frowns.
+                Apologizing does not always mean that you're wrong and the other person is right. It just means that you value your relationship more than your ego.
+                By asking forgiveness your not going to become bigger or smaller in value but the person who forgives you has a very big heart
+                Give me a chance to show you that I can be of something worth to you, let me show you.
+                If you wanna love someone, then make sure ur never gonna have to say "sorry"
+                I trust fate and I believe in love, which is why I know you'll accept my apology. I'm sorry.</p>
+        </div>
+    </div>
+</div>
+
+<script>
+    const pages = document.querySelectorAll('.page');
+    let currentPage = 0;
+
+    pages.forEach((page, index) => {
+        page.addEventListener('click', () => {
+            if (index < pages.length - 1) {
+                pages[currentPage].classList.remove('active');
+                setTimeout(() => {
+                    currentPage++;
+                    pages[currentPage].classList.add('active');
+                }, 500);
+            } else {
+                pages[currentPage].classList.remove('active');
+                currentPage = 0;
+                pages[currentPage].classList.add('active');
+            }
+        });
+    });
+
+    function createFirecracker(x, y) {
+        const firecracker = document.createElement('div');
+        firecracker.className = 'firecracker';
+        firecracker.style.left = `${x}px`;
+        firecracker.style.top = `${y}px`;
+        document.body.appendChild(firecracker);
+
+        setTimeout(() => {
+            firecracker.remove();
+        }, 1000);
+    }
+
+    function createConfetti() {
+        const confetti = document.createElement('div');
+        confetti.className = 'confetti';
+        confetti.style.left = `${Math.random() * 100}%`;
+        confetti.style.animationDuration = `${Math.random() * 3 + 2}s`;
+        confetti.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
+        document.body.appendChild(confetti);
+
+        setTimeout(() => {
+            confetti.remove();
+        }, 5000);
+    }
+
+    function createSparkle() {
+        const sparkle = document.createElement('div');
+        sparkle.className = 'sparkle';
+        sparkle.style.left = `${Math.random() * 100}%`;
+        sparkle.style.top = `${Math.random() * 100}%`;
+        document.body.appendChild(sparkle);
+
+        setTimeout(() => {
+            sparkle.remove();
+        }, 2000);
+    }
+
+    document.body.addEventListener('click', (event) => {
+        createFirecracker(event.clientX, event.clientY);
+    });
+
+    setInterval(createConfetti, 300);
+    setInterval(createSparkle, 200);
+</script>
+</body>
+</html>

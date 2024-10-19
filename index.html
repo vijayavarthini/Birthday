@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="https://png.pngitem.com/pimgs/s/126-1269783_image-ofvern-sampels-landscaping-icon-vs-logo-png.png">
+    <title>Login Page</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body, html {
+            height: 100%;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+        }
+
+        /* Container for background */
+        .background-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://asset.gecdesigns.com/img/wallpapers/aesthetic-landscape-reflection-background-hd-wallpaper-sr10012410-1706502139247-cover.webp') no-repeat center center fixed;
+            background-size: cover;
+            filter: blur(8px); /* Blur applied to the background */
+            z-index: -2;
+        }
+
+        /* Confetti animation */
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #ffcd3c;
+            opacity: 0.9;
+            animation: fall 3s linear infinite;
+        }
+
+        .confetti:nth-child(odd) {
+            background-color: #ff3c8d;
+        }
+
+        .confetti:nth-child(even) {
+            background-color: #5E35B1;
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(-100vh) rotate(0deg); }
+            100% { transform: translateY(100vh) rotate(360deg); }
+        }
+
+        /* Balloon animations */
+        .balloon {
+            position: absolute;
+            width: 50px;
+            height: 70px;
+            background-color: #FF69B4;
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .balloon:nth-child(odd) {
+            background-color: #FFD700;
+        }
+
+        .balloon:nth-child(even) {
+            background-color: #87CEEB;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(100vh); }
+            50% { transform: translateY(50vh); }
+            100% { transform: translateY(-100vh); }
+        }
+
+        /* Centering the login box */
+        .login-wrapper {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 400px;
+            padding: 40px;
+            background-color: #F2C464; /* Birthday cake color */
+            border-radius: 10px;
+            box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            z-index: 1;
+            animation: appear 2s ease-in-out;
+        }
+
+        @keyframes appear {
+            0% { transform: translate(-50%, -100%); opacity: 0; }
+            100% { transform: translate(-50%, -50%); opacity: 1; }
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #FF69B4; /* Bright pink text */
+            animation: fadeIn 3s ease;
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+        
+        @media (max-width: 600px) {
+            .login-wrapper {
+                width: 90%; /* Make the login box take up more width */
+                padding: 20px; /* Reduce padding for smaller screens */
+            }
+
+            h2 {
+                font-size: 1.5rem; /* Adjust font size for the heading */
+            }
+
+            input {
+                font-size: 0.9rem; /* Slightly smaller font size for inputs */
+            }
+
+            button {
+                font-size: 1rem; /* Adjust button font size */
+            }
+
+            .extra-links a {
+                font-size: 0.8rem; /* Smaller font size for extra links */
+            }
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            background: #FFF0F0; /* Pastel white background */
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #FFC107; /* Birthday button color */
+            border: none;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0); }
+        }
+
+        button:hover {
+            background-color: #FFA07A; /* Birthday button hover */
+        }
+
+        .extra-links {
+            margin-top: 10px;
+        }
+
+        .extra-links a {
+            color: #FF69B4; /* Bright pink text */
+            text-decoration: none;
+            font-size: 0.9rem;
+            animation: swing 2s ease-in-out infinite;
+        }
+
+        @keyframes swing {
+            0% { transform: rotate(0deg); }
+            50% { transform: rotate(10deg); }
+            100% { transform: rotate(0deg); }
+        }
+
+        .extra-links a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Blurred background -->
+    <div class="background-container"></div>
+
+    <!-- Confetti elements -->
+    <div class="confetti" style="top: 10%; left: 20%;"></div>
+    <div class="confetti" style="top: 20%; left: 40%;"></div>
+    <div class="confetti" style="top: 30%; left: 60%;"></div>
+    <div class="confetti" style="top: 40%; left: 80%;"></div>
+    <div class="confetti" style="top: 50%; left: 20%;"></div>
+    <div class="confetti" style="top: 60%; left: 40%;"></div>
+    <div class="confetti" style="top: 70%; left: 60%;"></div>
+    <div class="confetti" style="top: 80%; left: 80%;"></div>
+
+    <!-- Balloon elements -->
+    <div class="balloon" style="top: 10%; left: 30%;"></div>
+    <div class="balloon" style="top: 20%; left: 50%;"></div>
+    <div class="balloon" style="top: 30%; left: 70%;"></div>
+    <div class="balloon" style="top: 40%; left: 30%;"></div>
+    <div class="balloon" style="top: 50%; left: 50%;"></div>
+    <div class="balloon" style="top: 60%; left: 70%;"></div>
+    <div class="balloon" style="top: 70%; left: 30%;"></div>
+    <div class="balloon" style="top: 80%; left: 50%;"></div>
+
+    <!-- Login box -->
+    <div class="login-wrapper">
+        <h2>Happy Birthday Papa❤️</h2>
+        <input type="text" id="username" placeholder="Sweet Name">
+        <input type="password" id="password" placeholder="Date Of Birth"><br><br>
+        <button onclick="login()">Surprise</button>
+        <div class="extra-links"></div>
+    </div>
+
+    <audio id="birthday-music" loop>
+        <source src="ThaayeThaayeVS.mp3" type="audio/mp3">
+        Your browser does not support the audio element.
+    </audio>
+
+    <script>
+        function login() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            if (username === "VijiSundar" && password === "VS0420") {
+                document.getElementById('birthday-music').play();
+                setTimeout(() => {
+                    window.location.href = "birthday.html"; 
+                }, 1000);
+            } else {
+                alert("Incorrect username or password! Please try again.");
+            }
+        }
+    </script>
+</body>
+</html>
